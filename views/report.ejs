@@ -1272,9 +1272,9 @@
                   >
                     <div style="position: relative">
                       <% if
-                      (firstPhysicalAndMentalHealthScore.mentalHealthScoreTScore
+                      ( firstPhysicalAndMentalHealthScore && firstPhysicalAndMentalHealthScore?.mentalHealthScoreTScore
                       !== undefined &&
-                      firstPhysicalAndMentalHealthScore.mentalHealthScoreTScore
+                      firstPhysicalAndMentalHealthScore?.mentalHealthScoreTScore
                       !== null) { %>
                       <div
                         class="mental-dynamic-data"
@@ -1299,9 +1299,9 @@
                         </div>
                       </div>
                       <% } %> <% if
-                      (latestPhysicalAndMentalHealthScore.mentalHealthScoreTScore
+                      (latestPhysicalAndMentalHealthScore && latestPhysicalAndMentalHealthScore?.mentalHealthScoreTScore
                       !== undefined &&
-                      latestPhysicalAndMentalHealthScore.mentalHealthScoreTScore
+                      latestPhysicalAndMentalHealthScore?.mentalHealthScoreTScore
                       !== null) { %>
                       <div
                         class="mental-dynamic-data"
@@ -1363,9 +1363,9 @@
                   >
                     <div style="position: relative">
                       <%
-                      if(firstPhysicalAndMentalHealthScore.physicalHealthScoreTScore
+                      if(firstPhysicalAndMentalHealthScore && firstPhysicalAndMentalHealthScore?.physicalHealthScoreTScore
                       !== null &&
-                      firstPhysicalAndMentalHealthScore.physicalHealthScoreTScore
+                      firstPhysicalAndMentalHealthScore?.physicalHealthScoreTScore
                       !== undefined) {%>
                       <div
                         class="mental-dynamic-data"
@@ -1390,9 +1390,9 @@
                         </div>
                       </div>
                       <% } %> <%
-                      if(latestPhysicalAndMentalHealthScore.physicalHealthScoreTScore
+                      if(latestPhysicalAndMentalHealthScore && latestPhysicalAndMentalHealthScore?.physicalHealthScoreTScore
                       !== null &&
-                      latestPhysicalAndMentalHealthScore.physicalHealthScoreTScore
+                      latestPhysicalAndMentalHealthScore?.physicalHealthScoreTScore
                       !== undefined) {%>
                       <div
                         class="mental-dynamic-data"
@@ -3198,19 +3198,20 @@
           </div>
         </div>
         <div class="confidence-values-container flex-col">
-          <div class="confidence-level level-2">
+
+           <% procheskaDiclementeResponses.map(function(item) { %>
+              <div class="confidence-level level-2">
             <div class="flex-row">
               <div class="label flex-row">
                 <p class="">
-                  I don't think I have a problem with my exercise and nutrition habits
+                 <%= item?.questionDescription %>
                 </p>
               </div>
-              <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "I don't think I have a problem with my exercise and nutrition habits")){ %>
+            
+            
               <div class="values flex-row space-between pl20">
                 <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I don't think I have a problem with my exercise and nutrition habits"))?.response?.response ==  "Strongly agree"){ %>
+                  <% if (item?.response?.response ==  "Strongly agree"){ %>
                      
                                                <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
 
@@ -3218,8 +3219,7 @@
                
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I don't think I have a problem with my exercise and nutrition habits"))?.response?.response ==  "Disagree"){ %>
+                  <% if (item?.response?.response ==  "Disagree"){ %>
                      
                                                <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
 
@@ -3227,8 +3227,7 @@
                   
                 </div>
                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I don't think I have a problem with my exercise and nutrition habits"))?.response?.response ==  "Unsure"){ %>
+                  <% if (item?.response?.response ==  "Unsure"){ %>
                      
                                                <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
 
@@ -3236,8 +3235,7 @@
                   
                 </div>
                    <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I don't think I have a problem with my exercise and nutrition habits"))?.response?.response ==  "Agree"){ %>
+                  <% if (item?.response?.response ==  "Agree"){ %>
                      
                                                <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
 
@@ -3245,8 +3243,7 @@
                   
                 </div>
                    <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I don't think I have a problem with my exercise and nutrition habits"))?.response?.response ==  "Strongly disagree"){ %>
+                  <% if (item?.response?.response ==  "Strongly disagree"){ %>
                      
                                                <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
 
@@ -3254,606 +3251,11 @@
                   
                 </div>
               </div>
-              <% } %>
+            
             </div>
           </div>
-          
-          <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  I enjoy my unhealthy foods, but sometimes I eat too much.
-                </p>
-              </div>
-             <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "I enjoy my unhealthy foods, but sometimes I eat too much.")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I enjoy my unhealthy foods, but sometimes I eat too much."))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I enjoy my unhealthy foods, but sometimes I eat too much."))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I enjoy my unhealthy foods, but sometimes I eat too much."))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I enjoy my unhealthy foods, but sometimes I eat too much."))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I enjoy my unhealthy foods, but sometimes I eat too much."))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  Sometimes I think I should cut back on my 'unhealthy food intake'
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "Sometimes I think I should cut back on my 'unhealthy food intake'")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          
-       <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  Its a waste of time thinking about my exercise and nutrition habits
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "Its a waste of time thinking about my exercise and nutrition habits")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Its a waste of time thinking about my exercise and nutrition habits"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Its a waste of time thinking about my exercise and nutrition habits"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Its a waste of time thinking about my exercise and nutrition habits"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Its a waste of time thinking about my exercise and nutrition habits"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          
+        <% }); %>
          
-          <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  I have just recently adjusted my exercise and nutrition habit
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "I have just recently adjusted my exercise and nutrition habit")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I have just recently adjusted my exercise and nutrition habit"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I have just recently adjusted my exercise and nutrition habit"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I have just recently adjusted my exercise and nutrition habit"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I have just recently adjusted my exercise and nutrition habit"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-         
-                  <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Anyone can talk about wanting to do something about wanting to improve their exercise and nutrition, but I am actually doing something about it"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-
-        <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  I am at the stage where I should think about Improving my exercise and nutrition habits
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "I am at the stage where I should think about Improving my exercise and nutrition habits")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am at the stage where I should think about Improving my exercise and nutrition habits"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am at the stage where I should think about Improving my exercise and nutrition habits"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am at the stage where I should think about Improving my exercise and nutrition habits"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am at the stage where I should think about Improving my exercise and nutrition habits"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-        <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  My 'Exercise and nutrition habits' is a problem sometimes
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "My 'Exercise and nutrition habits' is a problem sometimes")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("My 'Exercise and nutrition habits' is a problem sometimes"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("My 'Exercise and nutrition habits' is a problem sometimes"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("My 'Exercise and nutrition habits' is a problem sometimes"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("My 'Exercise and nutrition habits' is a problem sometimes"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  There is no need for me to think about changing 'Exercise and nutrition habits'
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "There is no need for me to think about changing 'Exercise and nutrition habits'")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("There is no need for me to think about changing 'Exercise and nutrition habits'"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("There is no need for me to think about changing 'Exercise and nutrition habits'"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("There is no need for me to think about changing 'Exercise and nutrition habits'"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("There is no need for me to think about changing 'Exercise and nutrition habits'"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-         
-            <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  I am actually changing my Exercise and nutrition habits right now.
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "I am actually changing my Exercise and nutrition habits right now.")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am actually changing my Exercise and nutrition habits right now."))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am actually changing my Exercise and nutrition habits right now."))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am actually changing my Exercise and nutrition habits right now."))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am actually changing my Exercise and nutrition habits right now."))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("I am actually changing my Exercise and nutrition habits right now."))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
-          <div class="confidence-level level-2">
-            <div class="flex-row">
-              <div class="label flex-row">
-                <p class="">
-                  Trying to exercise and improve my nutrition would be pointless for me
-                </p>
-              </div>
-               <% if (procheskaDiclementeResponses.find(response =>
-                      response.questionDescription === "Trying to exercise and improve my nutrition would be pointless for me")){ %>
-              <div class="values flex-row space-between pl20">
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Trying to exercise and improve my nutrition would be pointless for me"))?.response?.response ==  "Strongly agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-               
-                </div>
-                <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Sometimes I think I should cut back on my 'unhealthy food intake'"))?.response?.response ==  "Disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                  <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Trying to exercise and improve my nutrition would be pointless for me"))?.response?.response ==  "Unsure"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Trying to exercise and improve my nutrition would be pointless for me"))?.response?.response ==  "Agree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-                   <div class="confidence-check-boxes flex-col"><div class="box">
-                  <% if (procheskaDiclementeResponses.find(response =>
-                      String(response.questionDescription).includes("Trying to exercise and improve my nutrition would be pointless for me"))?.response?.response ==  "Strongly disagree"){ %>
-                     
-                                               <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
-
-                         <% } %></div>
-                  
-                </div>
-              </div>
-              <% } %>
-            </div>
-          </div>
         </div>
 
         <div class="footer-text">
@@ -3940,6 +3342,7 @@
       var mentalDynamicData = [];
 
       if (
+        latestPhysicalAndMentalHealthScore &&
         latestPhysicalAndMentalHealthScore?.mentalHealthScoreTScore !== null &&
         latestPhysicalAndMentalHealthScore.mentalHealthScoreTScore !== undefined
       ) {
@@ -3951,6 +3354,7 @@
       }
 
       if (
+        firstPhysicalAndMentalHealthScore && 
         firstPhysicalAndMentalHealthScore?.mentalHealthScoreTScore !== null &&
         firstPhysicalAndMentalHealthScore?.mentalHealthScoreTScore !== undefined
       ) {
@@ -3980,6 +3384,7 @@
       var physicalDynamicData = [];
 
       if (
+        latestPhysicalAndMentalHealthScore && 
         latestPhysicalAndMentalHealthScore?.physicalHealthScoreTScore !==
           null &&
         latestPhysicalAndMentalHealthScore.physicalHealthScoreTScore !==
@@ -3992,6 +3397,7 @@
       }
 
       if (
+        firstPhysicalAndMentalHealthScore &&
         firstPhysicalAndMentalHealthScore?.physicalHealthScoreTScore !== null &&
         firstPhysicalAndMentalHealthScore?.physicalHealthScoreTScore !==
           undefined
