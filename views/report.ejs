@@ -1326,6 +1326,35 @@
                         </div>
                       </div>
                       <% } %>
+
+                      <% if
+                      (mentalHealthScoreTScore
+                      !== undefined &&
+                      mentalHealthScoreTScore
+                      !== null) { %>
+                      <div
+                        class="mental-dynamic-data"
+                        id="mental-dynamic-data-2"
+                      >
+                        <div
+                          style="
+                            position: relative;
+                            top: -1px;
+                            left: 1px;
+                            font-size: 6px;
+                            height: inherit;
+                            justify-content: space-around;
+                            padding: 0px 1px 0px 1px;
+                          "
+                          class="flex-row"
+                        >
+                          <p class="nowrap">
+                            <%= String(dateSubmitted).replaceAll('th',' | ').replaceAll(',',' | ')
+                            %>
+                          </p>
+                        </div>
+                      </div>
+                      <% } %>
                     </div>
                   </div>
                 </div>
@@ -1412,6 +1441,35 @@
                         >
                           <p class="nowrap">
                             <%= String(latestPhysicalAndMentalHealthScore?.date)
+                            %>
+                          </p>
+                        </div>
+                      </div>
+                      <% } %>
+
+                      <%
+                      if( physicalHealthScoreTScore
+                      !== null &&
+                      physicalHealthScoreTScore
+                      !== undefined) {%>
+                      <div
+                        class="mental-dynamic-data"
+                        id="physical-dynamic-data-2"
+                      >
+                        <div
+                          style="
+                            position: relative;
+                            top: -1px;
+                            left: 1px;
+                            font-size: 6px;
+                            height: inherit;
+                            justify-content: space-around;
+                            padding: 0px 1px 0px 1px;
+                          "
+                          class="flex-row"
+                        >
+                          <p class="nowrap">
+                          <%= String(dateSubmitted).replaceAll('th',' | ').replaceAll(',',' | ')
                             %>
                           </p>
                         </div>
@@ -3288,7 +3346,21 @@
       );
 
 
+
+      var mentalHealthScoreTScore = JSON.parse(
+        `<%- JSON.stringify(mentalHealthScoreTScore) %>`
+      );
+
+      var dateSubmitted = JSON.parse(
+        `<%- JSON.stringify(dateSubmitted) %>`
+      );
     
+
+      var physicalHealthScoreTScore = JSON.parse(
+        `<%- JSON.stringify(physicalHealthScoreTScore) %>`
+      );
+
+
       function calculateValueInRangeTScore(x) {
         if (x == 20) return 9;
         if (x == 30) return 28;
@@ -3346,11 +3418,12 @@
         latestPhysicalAndMentalHealthScore?.mentalHealthScoreTScore !== null &&
         latestPhysicalAndMentalHealthScore.mentalHealthScoreTScore !== undefined
       ) {
-        console.log(mentalDynamicData);
+       
         mentalDynamicData.push({
           value:
             latestPhysicalAndMentalHealthScore?.mentalHealthScoreTScore || 0,
         });
+    
       }
 
       if (
@@ -3362,7 +3435,13 @@
           value:
             firstPhysicalAndMentalHealthScore?.mentalHealthScoreTScore || 0,
         });
+
+
       }
+
+          mentalDynamicData.push(({
+          value: mentalHealthScoreTScore || 0
+        }))
 
       mentalDynamicData?.map((value, index) => {
         document.addEventListener("DOMContentLoaded", function () {
@@ -3394,6 +3473,8 @@
           value:
             latestPhysicalAndMentalHealthScore?.physicalHealthScoreTScore || 0,
         });
+
+        
       }
 
       if (
@@ -3407,6 +3488,10 @@
             firstPhysicalAndMentalHealthScore?.physicalHealthScoreTScore || 0,
         });
       }
+
+        physicalDynamicData.push(({
+          value: physicalHealthScoreTScore || 0
+        }))
 
       physicalDynamicData?.map((value, index) => {
         document.addEventListener("DOMContentLoaded", function () {

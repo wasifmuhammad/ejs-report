@@ -465,13 +465,13 @@ const data2 = {
     "Patients with a very low self-efficacy score are least likely to achieve their goals and overcome barriers without extensive support.  Take small incremental steps and breakdown tasks to make it easier for them to understand and follow.  Be patient and provide positive reinforcement with  minimal progress.  Educate them on the resources available to them through the app and on how to communicate questions, concerns, and request support.  It is important they feel comfortable to ask for help.",
   selfEfficacyRating: "Very Low",
   physicalHealthRating: "Poor",
-  physicalHealthScoreTScore: 0,
+  physicalHealthScoreTScore: 87,
   physicalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
   mentalHealthRating: "Poor",
   mentalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-  mentalHealthScoreTScore: 0,
+  mentalHealthScoreTScore: 89,
   physicalHealthScore: 0,
   motivationStage: "Pre-contemplative",
   motivationStageRecommendation:
