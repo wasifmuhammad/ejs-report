@@ -460,18 +460,18 @@ const data2 = {
       "Not eligible for RPM, but should receive ongoing emails and/or texts about healthy living, chronic conditions, and health risks",
   },
   rpmRecommendations: "Enroll in RPM",
-  selfEfficacyTScore: 22.2,
+  selfEfficacyTScore: 20,
   selfEfficacyRecommendation:
     "Patients with a very low self-efficacy score are least likely to achieve their goals and overcome barriers without extensive support.  Take small incremental steps and breakdown tasks to make it easier for them to understand and follow.  Be patient and provide positive reinforcement with  minimal progress.  Educate them on the resources available to them through the app and on how to communicate questions, concerns, and request support.  It is important they feel comfortable to ask for help.",
   selfEfficacyRating: "Very Low",
   physicalHealthRating: "Poor",
-  physicalHealthScoreTScore: 87,
+  physicalHealthScoreTScore: 20,
   physicalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
   mentalHealthRating: "Poor",
   mentalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-  mentalHealthScoreTScore: 89,
+  mentalHealthScoreTScore: 10,
   physicalHealthScore: 0,
   motivationStage: "Pre-contemplative",
   motivationStageRecommendation:
@@ -490,26 +490,26 @@ const data2 = {
   ],
   firstPhysicalAndMentalHealthScore: {
     physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 69,
+    physicalHealthScoreTScore: 30,
     physicalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
     mentalHealthRating: "Poor",
     mentalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 45,
-    physicalHealthScore: 45,
+    mentalHealthScoreTScore: 40,
+    physicalHealthScore: 60,
     date: "29 | Nov | 2023",
   },
   latestPhysicalAndMentalHealthScore: {
     physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 22,
+    physicalHealthScoreTScore: 50,
     physicalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
     mentalHealthRating: "Poor",
     mentalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 77,
-    physicalHealthScore: 77,
+    mentalHealthScoreTScore: 80,
+    physicalHealthScore: 20,
     date: "30 | Nov | 2023",
   },
   formattedDOB: "5th Dec, 2000",
@@ -596,6 +596,7 @@ app.get("/", (req, res) => {
     formattedDOB,
     dateSubmitted,
     doctorData,
+    bmiScore: 12,
     preferredLanguage: ["English", "Russian"],
     chronicConditions: ["Fever", "Dumyy"],
   });
@@ -657,7 +658,7 @@ app.get("/download", async (req, res) => {
   res.setHeader("Content-Type", "application/pdf");
   res.send(pdfBuffer);
 });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
