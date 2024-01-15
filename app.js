@@ -488,30 +488,8 @@ const data2 = {
     "In the last 12 months, has the electric, gas, oil, or water company threatened to shut off your services in your home?",
     "In the last 12 months, did you ever eat less than you felt you should. Because there wasn't enough money for food?",
   ],
-  firstPhysicalAndMentalHealthScore: {
-    physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 69,
-    physicalHealthRecommendation:
-      "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthRating: "Poor",
-    mentalHealthRecommendation:
-      "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 45,
-    physicalHealthScore: 45,
-    date: "29 | Nov | 2023",
-  },
-  latestPhysicalAndMentalHealthScore: {
-    physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 22,
-    physicalHealthRecommendation:
-      "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthRating: "Poor",
-    mentalHealthRecommendation:
-      "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 77,
-    physicalHealthScore: 77,
-    date: "30 | Nov | 2023",
-  },
+  firstPhysicalAndMentalHealthScore: null,
+  latestPhysicalAndMentalHealthScore: null,
   formattedDOB: "5th Dec, 2000",
   dateSubmitted: "15th Dec, 2023",
 };
@@ -596,6 +574,7 @@ app.get("/", (req, res) => {
     formattedDOB,
     dateSubmitted,
     doctorData,
+    bmiScore: 12,
     preferredLanguage: ["English", "Russian"],
     chronicConditions: ["Fever", "Dumyy"],
   });
@@ -657,7 +636,7 @@ app.get("/download", async (req, res) => {
   res.setHeader("Content-Type", "application/pdf");
   res.send(pdfBuffer);
 });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

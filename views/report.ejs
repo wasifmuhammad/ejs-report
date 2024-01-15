@@ -1205,11 +1205,55 @@
                     </div>
                     <p class="score-text"><%= selfEfficacyRecommendation %></p>
                   </div>
-                  <div class="scale">
+                   <div style="position: relative" class="scale">
                     <img
                       src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/promise.png"
                     />
+                 
+                  <div
+                    style="
+                      width: 100%;
+                      background-color: transparent;
+                      z-index: 1;
+                      height: 100%;
+                      position: absolute;
+                      top: 0px;
+                      padding-top: 10px;
+                    "
+                  >
+                    <div style="position: relative">
+                      <%
+                      if(selfEfficacyRating 
+                      !== null &&
+                   selfEfficacyRating 
+                      !== undefined) {%>
+                      <div
+                        class="mental-dynamic-data"
+                        id="self-efficacy-data"
+                      >
+                        <div
+                          style="
+                            position: relative;
+                            top: -1px;
+                            left: 1px;
+                            font-size: 6px;
+                            height: inherit;
+                            justify-content: space-around;
+                            padding: 0px 1px 0px 1px;
+                          "
+                          class="flex-row"
+                        >
+                          <p class="nowrap">
+                        <%= String(dateSubmitted).replaceAll('th',' | ').replaceAll(',',' | ')
+                            %>
+                          </p>
+                        </div>
+                      </div>
+                      <% } %> 
+                    </div>
                   </div>
+                </div>
+                
                 </div>
               </div>
             </div>
@@ -1536,8 +1580,8 @@
               <p><%= reqData?.firstName %> <%= reqData?.lastName %></p>
             </div>
             <div class="full-name flex-row end pt15">
-              <p>Pref. Language:</p>
-              <p><%=[ ...preferredLanguage].join(', ') %></p>
+              <p>Date Of Birth:</p>
+               <p><%= formattedDOB %></p> 
             </div>
           </div>
 
@@ -1546,12 +1590,29 @@
               <p>Phone No:</p>
               <p><%= reqData?.cellPhoneNumber %></p>
             </div>
+         
             <div class="full-name flex-row end pt15">
               <p>Best time to call:</p>
               <p><%= reqData?.bestTimeToCall %></p>
             </div>
           </div>
+          
+          
         </div>
+     <div class="info-section flex-row space-between ">
+          <div class="flex-col">
+            
+            <div class="full-name flex-row end pt15">
+              <p>Pref. Language:</p>
+              <p><%=[ ...preferredLanguage].join(', ') %></p>
+            </div>
+          </div>
+
+         
+          
+          
+        </div>
+        
         <div class="confidence-level pt40">
           <div class="flex-row">
             <div class="label flex-row">
@@ -1958,15 +2019,15 @@
             </p>
           </div>
         </div>
-        <div class="info-section flex-row space-between pt40">
+       <div class="info-section flex-row space-between pt40">
           <div class="flex-col">
             <div class="full-name flex-row end">
               <p>Full Name:</p>
               <p><%= reqData?.firstName %> <%= reqData?.lastName %></p>
             </div>
             <div class="full-name flex-row end pt15">
-              <p>Pref. Language:</p>
-              <p><%=[ ...preferredLanguage].join(', ') %></p>
+              <p>Date Of Birth:</p>
+               <p><%= formattedDOB %></p> 
             </div>
           </div>
 
@@ -1975,11 +2036,27 @@
               <p>Phone No:</p>
               <p><%= reqData?.cellPhoneNumber %></p>
             </div>
+         
             <div class="full-name flex-row end pt15">
               <p>Best time to call:</p>
               <p><%= reqData?.bestTimeToCall %></p>
             </div>
           </div>
+          
+          
+        </div>
+     <div class="info-section flex-row space-between ">
+          <div class="flex-col">
+            
+            <div class="full-name flex-row end pt15">
+              <p>Pref. Language:</p>
+              <p><%=[ ...preferredLanguage].join(', ') %></p>
+            </div>
+          </div>
+
+         
+          
+          
         </div>
         <div class="question-area pt40">
           <div class="title flex-row space-between">
@@ -2069,8 +2146,8 @@
               <p><%= reqData?.firstName %> <%= reqData?.lastName %></p>
             </div>
             <div class="full-name flex-row end pt15">
-              <p>Pref. Language:</p>
-            <p><%=[ ...preferredLanguage].join(', ') %></p>
+              <p>Date Of Birth:</p>
+               <p><%= formattedDOB %></p> 
             </div>
           </div>
 
@@ -2079,11 +2156,27 @@
               <p>Phone No:</p>
               <p><%= reqData?.cellPhoneNumber %></p>
             </div>
+         
             <div class="full-name flex-row end pt15">
               <p>Best time to call:</p>
               <p><%= reqData?.bestTimeToCall %></p>
             </div>
           </div>
+          
+          
+        </div>
+     <div class="info-section flex-row space-between ">
+          <div class="flex-col">
+            
+            <div class="full-name flex-row end pt15">
+              <p>Pref. Language:</p>
+              <p><%=[ ...preferredLanguage].join(', ') %></p>
+            </div>
+          </div>
+
+         
+          
+          
         </div>
         <div class="confidence-level titles pt40">
           <div class="flex-row">
@@ -2104,6 +2197,8 @@
         </div>
         
         <div class="confidence-values-container flex-col">
+
+         
           <div class="confidence-level level-2">
             <div class="flex-row">
               <div class="label flex-row">
@@ -2121,7 +2216,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                  <div class="box">
@@ -2130,7 +2225,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                 <% if (globalShortForm10Responses.find(response =>
@@ -2144,14 +2239,14 @@
                       String(response.questionDescription).includes("In general, would you say your quality of life is"))?.response?.response === "Fair"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("In general, would you say your quality of life is"))?.response?.response === "Poor"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2159,15 +2254,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2175,7 +2262,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2199,7 +2294,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                  <div class="box">
@@ -2208,7 +2303,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">  <div class="box">
                 <% if (globalShortForm10Responses.find(response =>
@@ -2222,14 +2317,14 @@
                       String(response.questionDescription).includes("In general, how would you rate your physical health?"))?.response?.response === "Fair"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">  <div class="box">
                   <% if (globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("In general, how would you rate your physical health?"))?.response?.response === "Poor"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2237,15 +2332,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2253,7 +2340,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2280,7 +2375,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                  <div class="box">
@@ -2289,7 +2384,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                 <% if (globalShortForm10Responses.find(response =>
@@ -2303,14 +2398,14 @@
                       String(response.questionDescription).includes("In general, how would you rate your mental health, including your mood and your ability to think"))?.response?.response === "Fair"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("In general, how would you rate your mental health, including your mood and your ability to think"))?.response?.response === "Poor"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2318,15 +2413,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2334,7 +2421,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2358,7 +2453,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                  <div class="box">
@@ -2367,7 +2462,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                 <% if (globalShortForm10Responses.find(response =>
@@ -2381,14 +2476,14 @@
                       String(response.questionDescription).includes("In general, how would you rate your satisfaction with your social activities and relationships"))?.response?.response === "Fair"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("In general, how would you rate your satisfaction with your social activities and relationships"))?.response?.response === "Poor"){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2396,15 +2491,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2412,7 +2499,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2457,7 +2552,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                  <div class="box">
@@ -2466,7 +2561,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %>
                   </div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                 <% if (globalShortForm10Responses.find(response =>
@@ -2481,14 +2576,14 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("To what extent are you able to carry out your everyday physical activities such as walking, climbing stairs, carrying groceries, or moving a chair?"))?.response?.response).toLowerCase() === String("Not at all").toLowerCase()){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2496,15 +2591,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2512,7 +2599,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2558,7 +2653,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
@@ -2574,7 +2669,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>3</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
@@ -2582,14 +2677,14 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("How often have you been bothered by emotional problems such as feeling anxious, depressed or irritable"))?.response?.response).toLowerCase() === String("Always").toLowerCase()){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2597,15 +2692,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2613,7 +2700,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2659,7 +2754,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
@@ -2675,7 +2770,7 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>3</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
@@ -2683,14 +2778,14 @@
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (String(globalShortForm10Responses.find(response =>
                       String(response.questionDescription).includes("How would you rate your fatigue on average?"))?.response?.response).toLowerCase() === String("very Severe").toLowerCase()){ %>
                         <img src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/tick.png"  class="tick-sign" />
                          <% } %></div>
-                  <p>5</p>
+                  <p>1</p>
                 </div>
               </div>
                 <%  } else   {%>
@@ -2698,15 +2793,7 @@
                   <div class="values flex-row">
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>1</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>2</p>
-                </div>
-                <div class="confidence-check-boxes flex-col">
-                  <div class="box"></div>
-                  <p>3</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
@@ -2714,7 +2801,15 @@
                 </div>
                 <div class="confidence-check-boxes flex-col">
                   <div class="box"></div>
-                  <p>5</p>
+                  <p>3</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>2</p>
+                </div>
+                <div class="confidence-check-boxes flex-col">
+                  <div class="box"></div>
+                  <p>1</p>
                 </div>
               </div>
                        <%  } %>
@@ -2763,7 +2858,7 @@
                         </p>
                         
                          <% } %></div>
-                  <p>1</p>
+                  <p>5</p>
                 </div>
                 <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
@@ -2775,7 +2870,7 @@
                         </p>
                         
                          <% } %></div>
-                  <p>2</p>
+                  <p>4</p>
                 </div>
                   <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
@@ -2799,7 +2894,7 @@
                         </p>
                         
                          <% } %></div>
-                  <p>4</p>
+                  <p>2</p>
                 </div>
                <div class="confidence-check-boxes flex-col"><div class="box">
                   <% if (globalShortForm10Responses.find(response =>
@@ -2810,7 +2905,7 @@
                         </p>
                         
                          <% } %></div>
-                  <p>10</p>
+                  <p>1</p>
               </div>
               </div>
                 <%  } else   {%>
@@ -3005,7 +3100,7 @@
                   <p>Write your score</p>
                   <div class="answer-box">
                     <p class="answer-text">
-                      <%= reqData?.bmi %></p>
+                      <%= bmiScore %></p>
                   </div>
                 </div>
                 <div
@@ -3338,6 +3433,8 @@
     </div>
 
     <script>
+
+      
       var latestPhysicalAndMentalHealthScore = JSON.parse(
         `<%- JSON.stringify(latestPhysicalAndMentalHealthScore) %>`
       );
@@ -3345,6 +3442,9 @@
         `<%- JSON.stringify(firstPhysicalAndMentalHealthScore) %>`
       );
 
+       var selfEfficacyRating = JSON.parse(
+        `<%- JSON.stringify(selfEfficacyTScore) %>`
+      );
 
 
       var mentalHealthScoreTScore = JSON.parse(
@@ -3386,7 +3486,8 @@
         if (x > 80) return 124;
       }
 
-      function calculateValueInRange(x) {
+
+     function calculateValueInRange(x) {
         if (x == 20) return 11;
         if (x == 30) return 48;
         if (x == 40) return 85;
@@ -3410,6 +3511,52 @@
         if (x < 80) return 196 + x / 4;
         if (x > 80) return 235;
       }
+
+      
+        function calculatedSelfEffcasyValue (x) {
+        
+        if (x == 20) return 8;
+        if (x == 30) return 27;
+        if (x == 40) return 46;
+        if (x == 50) return 65;
+        if (x == 60) return 84;
+        if (x == 70) return 103;
+        if (x == 80) return 122;
+        if (x <= 10) return 3;
+        if (x < 20) return 6;
+        if (x <= 25) return 18;
+        if (x < 30) return 23;
+        if (x <= 35) return 33;
+        if (x < 40) return 43;
+        if (x <= 45) return 53;
+        if (x < 50) return 62;
+        if (x <= 55) return 72;
+        if (x < 60) return 80;
+        if (x <= 65) return 90;
+        if (x < 70) return 98;
+        if (x <= 75) return 110;
+        if (x < 80) return 119;
+        if (x > 80) return 126;
+        return 0;
+      }
+     
+      if(selfEfficacyRating!= null && selfEfficacyRating != undefined){
+
+      
+      
+        document.addEventListener("DOMContentLoaded", function () {
+          const dynamicElement = document.getElementById(
+            `self-efficacy-data`
+          );
+          const calculatedValue = calculatedSelfEffcasyValue(selfEfficacyRating);
+          dynamicElement.style.top ="20px";
+          dynamicElement.style.right = `${calculatedValue}px`;
+        });
+        
+  
+
+      }
+
 
       var mentalDynamicData = [];
 
@@ -3439,9 +3586,7 @@
 
       }
 
-          mentalDynamicData.push(({
-          value: mentalHealthScoreTScore || 0
-        }))
+       
 
       mentalDynamicData?.map((value, index) => {
         document.addEventListener("DOMContentLoaded", function () {
@@ -3459,6 +3604,19 @@
         });
         return value;
       });
+
+
+          document.addEventListener("DOMContentLoaded", function () {
+          const dynamicElement = document.getElementById(
+            `mental-dynamic-data-2`
+          );
+          const calculatedValue = calculateValueInRange(mentalHealthScoreTScore || 0);
+
+          dynamicElement.style.top = '50px'
+
+          dynamicElement.style.right = `${calculatedValue}px`;
+        });
+
 
       var physicalDynamicData = [];
 
@@ -3489,9 +3647,7 @@
         });
       }
 
-        physicalDynamicData.push(({
-          value: physicalHealthScoreTScore || 0
-        }))
+       
 
       physicalDynamicData?.map((value, index) => {
         document.addEventListener("DOMContentLoaded", function () {
@@ -3508,6 +3664,20 @@
         });
         return value;
       });
+
+
+       
+      document.addEventListener("DOMContentLoaded", function () {
+          const dynamicElement = document.getElementById(
+            `physical-dynamic-data-2`
+          );
+          const calculatedValue = calculateValueInRange(physicalHealthScoreTScore || 0);
+
+          dynamicElement.style.top = "50px"
+          dynamicElement.style.right = `${calculatedValue}px`;
+        });
+
+
     </script>
   </body>
 </html>
