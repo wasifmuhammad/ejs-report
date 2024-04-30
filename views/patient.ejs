@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <style>
+      @media print {
+        .chart-container .chart-left .goal-value-container {
+          background-color: #f5f5f4 !important;
+          print-color-adjust: exact;
+        }
+        .chart-container .chart-left .goal-value-container p:nth-child(3) {
+          /* background-color: #dddddd !important; */
+          print-color-adjust: exact;
+        }
+        .program-activity .bar-container .label,
+        .biometric-main-container .overview-data-container {
+          print-color-adjust: exact;
+          background-color: #f5f5f4;
+        }
+      }
+      *,
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: “Inter”, sans-serif;
+        print-color-adjust: exact;
+        color: #545456;
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+      .start {
+        align-items: start;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .center {
+        justify-content: center;
+      }
+      .column {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .right {
+        justify-content: end;
+      }
+      .space-between {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .space-around {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+      }
+      .blackgray {
+        color: #545456 !important;
+      }
+      .green {
+        color: #003e53;
+      }
+      .blue {
+        color: #3d98da;
+      }
+      .gray {
+        color: #a9a9a9;
+      }
+      .w4 {
+        font-weight: 400;
+      }
+      .w5 {
+        font-weight: 500;
+      }
+      .w6 {
+        font-weight: 600;
+      }
+      .w7 {
+        font-weight: 700;
+      }
+      .pl10 {
+        padding-left: 10px;
+      }
+      .pl15 {
+        padding-left: 15px;
+      }
+      .pl20 {
+        padding-left: 20px;
+      }
+      .pl5 {
+        padding-left: 5px;
+      }
+      .pr5 {
+        padding-right: 5px;
+      }
+      .pl2 {
+        padding-left: 2px;
+      }
+      .pt2 {
+        padding-top: 2px;
+      }
+      .pt10 {
+        padding-top: 10px;
+      }
+      .pl1 {
+        padding-left: 1px;
+      }
+      .pt1 {
+        padding-top: 1px;
+      }
+      .pt2 {
+        padding-top: 2px;
+      }
+      .pt4 {
+        padding-top: 4px;
+      }
+      .pt5 {
+        padding-top: 5px;
+      }
+      .pt10 {
+        padding-top: 10px;
+      }
+      .pt15 {
+        padding-top: 15px;
+      }
+      .pt20 {
+        padding-top: 20px;
+      }
+      .pt25 {
+        padding-top: 25px;
+      }
+      .pt30 {
+        padding-top: 30px;
+      }
+      .pt40 {
+        padding-top: 40px;
+      }
+      .UP {
+        text-transform: uppercase;
+      }
+      .main-container .header {
+        padding: 0px 10px;
+        background-color: #003e53;
+        height: 68px;
+        display: flex;
+        align-items: center;
+      }
+      .main-container .header img {
+        width: 218px;
+        height: 32px;
+      }
+      .main-container .right-container {
+        font-size: 8px;
+      }
+      .main-container .right-container .left {
+        padding-right: 10px;
+      }
+      .gray-divider {
+        border: 1px solid #efefef;
+      }
+      .black-divider {
+        border: 1px solid #545456;
+      }
+      .plan-container {
+        padding: 20px 10px 10px 20px;
+        align-items: unset;
+      }
+      .scientific-recomendation,
+      .selected-option {
+        font-size: 8px;
+        padding: 0px 0px 5px 20px;
+        align-items: flex-start;
+      }
+      .scientific-recomendation .label,
+      .selected-option .label {
+        white-space: nowrap;
+      }
+      .plan-container .left {
+        font-size: 11px;
+        width: 45%;
+      }
+      .plan-container .right {
+        width: 55%;
+      }
+      .plan-container .left .name {
+        text-transform: uppercase;
+        font-size: 22.16px;
+      }
+      .plan-container .left .date {
+        font-size: 11px;
+        padding: 3px 0px 8px 0px;
+      }
+      .plan-container .left .current-goal {
+        font-size: 8px;
+        padding-bottom: 10px;
+      }
+      .plan-container .left .selected-plan {
+        font-size: 13px;
+      }
+      .plan-container .left .selected-reason,
+      .plan-container .left .enrollment-date {
+        font-size: 8px;
+      }
+      .plan-container .right .alerts,
+      .plan-container .weight-down-container .weight-this-month {
+        font-size: 11px;
+      }
+      .plan-container .weight-down-container img {
+        width: 10px;
+        height: 5px;
+      }
+      .plan-container .recommendations-container .recommendation-text {
+        font-size: 7px;
+      }
+      .plan-container .recommendations-container .points {
+        font-size: 7px;
+      }
+      .plan-container
+        .recommendations-container
+        .recommendations-right
+        .billing {
+        font-size: 7px;
+      }
+      .plan-container
+        .recommendations-container
+        .recommendations-right
+        .review {
+        font-size: 7px;
+      }
+      .chart-container {
+        display: flex;
+        flex-direction: row;
+      }
+      .chart-container .chart-left {
+        width: 50%;
+        border-right: 1px solid #efefef;
+      }
+      .chart-container .chart-left .engagement-container {
+        padding: 25px 3% 30px 3%;
+      }
+      .chart-container .chart-left .engagement-container .title {
+        font-size: 13px;
+      }
+      .chart-container .chart-left .engagement-container .intake {
+        font-size: 10px;
+      }
+      .chart-container .chart-left .goal-label-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: end;
+        font-size: 7px;
+      }
+      .chart-container .chart-left .goal-label-container .first {
+        width: 46%;
+      }
+      .chart-container .chart-left .goal-label-container .second {
+        width: 54%;
+        text-align: center;
+      }
+      .chart-container .chart-left .goal-value-container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        font-size: 9px;
+        flex-direction: row;
+        background: #f5f5f4;
+        margin-top: 10px;
+        min-height: 25px;
+        justify-content: space-between;
+        border-radius: 3px;
+        padding-left: 1%;
+      }
+      .chart-container .chart-left .goal-value-container .intake-image {
+        width: 19px;
+        height: 19px;
+      }
+      .chart-container .chart-left .goal-value-container .first {
+        width: 45%;
+      }
+      .chart-container .chart-left .goal-value-container .second {
+        width: 55%;
+        justify-content: unset;
+        text-align: center;
+      }
+      .chart-container .chart-left .goal-value-container p,
+      .chart-container .chart-left .goal-label-container .second p {
+        width: 33%;
+      }
+      .chart-container .chart-left .goal-label-container .second p {
+        width: 34%;
+      }
+      .chart-container .chart-left .goal-value-container .intake-label {
+        padding-left: 5%;
+        white-space: nowrap !important;
+      }
+      .chart-container .chart-left .goal-label-container p:nth-child(3) {
+        text-align: right;
+      }
+      .chart-container .chart-left .goal-value-container p:nth-child(3) {
+        text-align: right;
+        padding-right: 4%;
+      }
+      .chart-container .chart-left .steps-container {
+        padding: 30px 2% 20px 2%;
+        text-align: center;
+      }
+      .chart-container .chart-left .steps-container img {
+        width: 20px;
+        height: 18px;
+      }
+      .steps-container .steps-header p {
+        font-size: 10px;
+      }
+      .steps-container .averge-container {
+        width: 100%;
+      }
+      .steps-container .averge-container div {
+        background-color: #f5f5f4;
+        border-radius: 3px;
+        padding: 5px 0px;
+        width: 49%;
+        min-height: 25px;
+      }
+      .steps-container .averge-container .number {
+        font-size: 10px;
+      }
+      .steps-container .averge-container .text {
+        font-size: 7px;
+      }
+      .program-activity {
+        padding-bottom: 30px;
+      }
+      .program-activity .title {
+        font-size: 10px;
+        padding-bottom: 10px;
+      }
+      .bar-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+        padding-top: 25px;
+        margin-top: 5px;
+      }
+      .program-activity .bar-container .label {
+        font-size: 7px;
+        width: 50%;
+        background-color: #f5f5f4;
+        text-align: right;
+        padding-right: 1%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .program-activity .value {
+        width: 20%;
+        font-size: 8px;
+        padding-left: 5px;
+      }
+      .chart-container .chart-right .biometric-header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .chart-container .chart-right .biometric-title {
+        font-size: 13px;
+      }
+
+      .chart-container .chart-right .overview-text {
+        font-size: 10px;
+      }
+      .chart-container .chart-right {
+        width: 50%;
+      }
+      .chart-container
+        .chart-right
+        .biometric-main-container
+        .overview-data-container {
+        padding: 35px 2px 5px 2px;
+        background-color: #f5f5f4;
+        min-width: 78px;
+        min-height: 60px;
+        border-radius: 3px;
+      }
+      .chart-container .biometric-main-container {
+        padding: 30px 6% 30px 6%;
+      }
+      .biometric-main-container .overview {
+        padding-inline: 10%;
+      }
+      .biometric-main-container .overview-data-container .number {
+        font-size: 13px;
+        padding-bottom: 5px;
+      }
+      .biometric-main-container .overview-data-container .label {
+        font-size: 8.5px;
+        padding: 2px 0px;
+      }
+      .biometric-main-container .overview-data-container .date {
+        font-size: 6px;
+      }
+      .weight-graph {
+        padding-inline: 1%;
+      }
+      .weight-graph .weight-label {
+        text-align: center;
+        font-size: 11px;
+      }
+      .weight-graph .below-chart {
+        font-size: 5px;
+        align-items: center;
+      }
+      .weight-graph .blue-dot {
+        width: 5px;
+        height: 5px;
+        background-color: #3d98da;
+        border-radius: 100%;
+      }
+      .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 30px;
+      }
+      .support-info {
+        font-size: 10px;
+        font-weight: bold;
+      }
+      .support-text {
+        font-size: 7.5px;
+        font-weight: bold;
+        padding-top: 4px;
+      }
+      .contact-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-top: 2px;
+      }
+      .contact-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        border-right: 2px solid #a9a9a9;
+      }
+      .contact-item:last-child {
+        border-right: none;
+      }
+      .contact-text {
+        font-size: 7px;
+      }
+      .support-email {
+        font-size: 8px;
+        font-weight: bold;
+        padding-left: 3px;
+        display: inline-block;
+        color: #003e53;
+      }
+      .support-phone {
+        font-size: 7.5px;
+        font-weight: bold;
+        padding-left: 3px;
+        display: inline-block;
+      }
+      .support-select {
+        font-size: 7px;
+        font-weight: 500;
+        text-align: center;
+      }
+      .support-button {
+        font-size: 7px;
+        font-weight: bold;
+        text-align: center;
+        display: inline-block;
+        padding: 0 3px;
+      }
+      .yellow {
+        color: #ff9333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="header space-between">
+        <img
+          class="logo-image"
+          src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/ournewwhitelogo.png"
+          alt="logo"
+        />
+        <div class="right-container space-between">
+          <div class="left w4 blackgray">
+            <p class="label">Patient Name</p>
+            <p class="label">DOB</p>
+            <p class="label">Date of Report</p>
+          </div>
+          <div class="right w5">
+            <p class="value"><%= lastName %> <%= firstName %></p>
+            <p class="value"><%= dateOfBirth %></p>
+            <p class="value"><%= dateOfReport %></p>
+          </div>
+        </div>
+      </div>
+      <div class="black-divider"></div>
+
+      <div class="plan-container flex">
+        <div class="left">
+          <p class="name w5"><%= firstName %> <%= lastName %></p>
+          <div class="current-goal flex pt10">
+            <p class="label green w5 UP nowrap">Current Goal</p>
+            <% if (planSubmittedAt && planGoal) { %>
+            <p class="value w5 pl10">Submitted on <%= planSubmittedAt %></p>
+            <% } else {%>
+            <p class="value w5 pl10">N/A</p>
+            <% } %>
+          </div>
+          <p class="selected-plan w6">
+            <%= planGoal ? planGoal : "Plan Not Selected" %>
+          </p>
+          <div class="selected-reason flex pt5">
+            <p class="biggest">Biggest reason for goal:</p>
+            <% if (planMotivation) { %>
+            <p class="w5 pl5">I want</p>
+            <p class="yellow pl5 w5"><%= planMotivation %></p>
+            <% } else {%>
+            <p class="green pl5 w5">N/A</p>
+            <% } %>
+          </div>
+          <div class="enrollment-date pt5 flex">
+            <p>Barrier:</p>
+            <% if (planBarrier) { %>
+            <p class="w5 pl2"><%= planBarrier %></p>
+            <% } else {%>
+            <p class="w5 pl2">N/A</p>
+            <% } %>
+          </div>
+
+          <!-- <div class="selected-option flex pt5">
+            <p>Selected Option:</p>
+            <p class="green w7 pl5"><%= planSelectedOption %></p>
+          </div> -->
+
+          <!-- <div class="scientific-recomendation flex pt10">
+            <p>Scientific recommendation:</p>
+            <p class="pl2 w5">3-4 daily servings of fruits</p>
+          </div> -->
+        </div>
+        <div class="right pt10 pl20">
+          <p class="alerts UP w7">Alerts and recommendations</p>
+          <% if (weightDifference >= -50 && weightDifference <= 50) { %>
+          <div class="weight-down-container flex pt10">
+            <% if (weightDifference <= 0) { %>
+            <img
+              src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/Vector.png"
+              alt=""
+              class="up-down"
+            />
+
+            <% } else { %>
+            <img
+              src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/VectorDown.png"
+              alt=""
+              class="up-down"
+            />
+
+            <% } %>
+            <div class="weight-this-month pl5 flex">
+              <% if (weightDifference <= 0) { %>
+              <p>Down</p>
+              <% } else { %>
+              <p>Up</p>
+              <% } %>
+              <p class="w7 pl2"><%= weightDifference %> lbs</p>
+              <p class="pl2">this month!</p>
+            </div>
+          </div>
+          <% } %>
+
+          <div class="recommendations-container flex pt20">
+            <div class="recommendations-left">
+              <p class="recommendation-text UP w7">
+                Recommended questions for patient
+              </p>
+              <div class="points pl1 pt2">
+                <p class="point pt5 nowrap">
+                  1. How are you feeling about your goal?
+                </p>
+                <p class="point pt5">2. Why?</p>
+                <p class="point pt5 nowrap">
+                  3. What made your goal harder or easier?
+                </p>
+              </div>
+            </div>
+            <div class="recommendations-right pl20 pt5">
+              <div class="review flex start">
+                <p class="nowrap w7">Enrollment date:</p>
+                <p class="w7 pl2 nowrap"><%= joinedAt %></p>
+              </div>
+              <p class="billing UP w7 pt5">Billing Reminders</p>
+              <div class="review flex pt5">
+                <p>Data Review/Phone Call:</p>
+                <p class="w7 pl2">99457</p>
+              </div>
+              <div class="review flex">
+                <p>Device:</p>
+                <p class="w7 pl2">99454</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="scientific-recomendation flex pt10">
+        <p>Scientific recommendation:</p>
+        <p class="pl2 w5"><%= scientificRecommendation %></p>
+      </div> -->
+      <div class="scientific-recomendation flex pt10">
+        <p class="label">Scientific recommendation:</p>
+        <p class="pl2 w7">
+          <%= scientificRecommendation ? scientificRecommendation : "N/A" %>
+        </p>
+      </div>
+      <div class="selected-option flex">
+        <p class="label">Selected Option:</p>
+        <p class="green w7 pl5">
+          <%= planSelectedOption ? planSelectedOption : "N/A" %>
+        </p>
+      </div>
+
+      <div class="gray-divider"></div>
+      <div class="gray-divider"></div>
+      <div class="chart-container">
+        <div class="chart-left">
+          <div class="engagement-container center column">
+            <div class="UP w7 flex title">
+              <p>engagement</p>
+              <p class="pl2 green">data</p>
+            </div>
+            <p class="w7 intake pt10">Daily Intake</p>
+            <div class="goal-label-container pt40">
+              <div class="first"></div>
+              <div class="second flex">
+                <p class="green UP w7">Goal</p>
+                <p class="green UP w7">yesterday</p>
+                <p class="green UP w7">today</p>
+              </div>
+            </div>
+
+            <div class="goal-value-container w7">
+              <div class="flex first">
+                <img
+                  src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/water.png"
+                  alt="water"
+                  class="intake-image"
+                />
+                <p class="intake-label">Daily Water (oz)</p>
+              </div>
+              <div class="intake-values flex second">
+                <p class="">84</p>
+                <p class=""><%= yesterdayWaterIntake %></p>
+                <p class=""><%= todayWaterIntake %></p>
+              </div>
+            </div>
+
+            <div class="goal-value-container w7">
+              <div class="flex first">
+                <img
+                  src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/fruit.png"
+                  alt="fruit"
+                  class="intake-image"
+                />
+                <p class="intake-label">Daily fruit (serv)</p>
+              </div>
+              <div class="intake-values flex second">
+                <p class="">4</p>
+                <p class=""><%= yesterdayFruitIntake %></p>
+                <p class=""><%= todayFruitIntake %></p>
+              </div>
+            </div>
+
+            <div class="goal-value-container w7">
+              <div class="flex first">
+                <img
+                  src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/veggies.png"
+                  alt="veggies"
+                  class="intake-image"
+                />
+                <p class="intake-label">Daily veggies (serv)</p>
+              </div>
+              <div class="intake-values flex second">
+                <p class="">8</p>
+                <p class=""><%= yesterdayVegetableIntake %></p>
+                <p class=""><%= todayVegetableIntake %></p>
+              </div>
+            </div>
+          </div>
+          <div class="gray-divider"></div>
+          <div class="steps-container">
+            <div class="steps-header flex center">
+              <img
+                src="https://preventscripts-bucket.s3.eu-west-3.amazonaws.com/icons/steps.png"
+                alt="steps"
+                class="steps-image"
+              />
+              <p class="w7 pl5">Steps Per Day</p>
+            </div>
+
+            <div class="averge-container flex space-between pt20">
+              <div class="first">
+                <p class="w7 number"><%= lastMonthStepsAvg %></p>
+                <p class="green w5 text pt4">Last month's daily average</p>
+              </div>
+              <div class="second">
+                <p class="w7 number"><%= thisMonthStepsAvg %></p>
+                <p class="blue w5 text pt4">Current month's daily average</p>
+              </div>
+            </div>
+          </div>
+          <div class="gray-divider"></div>
+          <div class="program-activity flex column">
+            <p class="w7 title pt20">Program Activity</p>
+            <div class="bar-container w6 flex">
+              <div class="label"><p>times opened app:</p></div>
+              <p class="value pl10"><%= thisMonthOpened %></p>
+            </div>
+
+            <div class="bar-container w6 flex">
+              <div class="label"><p>times opened app last month:</p></div>
+              <p class="value pl10"><%= lastMonthOpened %></p>
+            </div>
+
+            <div class="bar-container w6 flex">
+              <div class="label"><p># scale data points (30 days):</p></div>
+              <p class="value pl10"><%= totalWeighInsThisMonth %></p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-right">
+          <div class="biometric-main-container">
+            <div class="biometric-header w7">
+              <div class="flex UP center biometric-title pt10">
+                <p>biometric</p>
+                <p class="green pl2">data</p>
+              </div>
+              <p class="pt5 overview-text">Overview</p>
+            </div>
+            <div class="flex space-around pt25">
+              <div class="overview-data-container">
+                <p class="w7 number"><%= bmi && bmi > 0? bmi : "N/A" %></p>
+                <p class="green w5 label pt5">BMI</p>
+                <p class="date gray pt5">
+                  Starting BMI: <%= startingBmi ? startingBmi : "N/A" %>
+                </p>
+              </div>
+              <div class="overview-data-container">
+                <% if ( latestBloodPressure?.systolic &&
+                latestBloodPressure?.dystolic) { %>
+                <p class="w7 number">
+                  <%= latestBloodPressure?.systolic %>/<%=
+                  latestBloodPressure?.dystolic %>
+                </p>
+                <% } %> <% if(!latestBloodPressure?.systolic) { %>
+                <p class="w7 number">N/A</p>
+                <% } %>
+
+                <p class="green w5 label pt5">BP</p>
+                <p class="date gray pt5">
+                  <%= latestBloodPressureDate ? latestBloodPressureDate: "N/A"
+                  %>
+                </p>
+              </div>
+              <div class="overview-data-container">
+                <p class="w7 number">
+                  <%= latestWeight?.value ? latestWeight?.value : "N/A" %>
+                </p>
+                <p class="green w5 label pt5">Last Weight</p>
+                <p class="date gray pt5">
+                  <%= latestWeightDate ? latestWeightDate : "N/A" %>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex overview space-around pt20">
+              <div class="overview-data-container">
+                <p class="w7 number">
+                  <%= latestBloodSugar.value ? latestBloodSugar?.value : "N/A"
+                  %>
+                </p>
+                <p class="green w5 label pt5">Blood Sugar</p>
+                <p class="date gray pt5">
+                  <%= latestBloodSugarDate ? latestBloodSugarDate : "N/A" %>
+                </p>
+              </div>
+              <div class="overview-data-container">
+                <p class="w7 number">
+                  <%= latestWaist.value ? latestWaist.value : "N/A" %>
+                </p>
+                <p class="green w5 label pt5">Waist</p>
+                <p class="date gray pt5">
+                  <%= latestWaistDate ? latestWaistDate : "N/A" %>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="gray-divider"></div>
+          <div class="weight-graph">
+            <p class="w7 weight-label pt20">Weight Tracker</p>
+            <div class="chart" id="chart"></div>
+            <div class="flex center below-chart">
+              <div class="blue-dot"></div>
+              <p class="gray pl2">Weight (lbs)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gray-divider"></div>
+
+      <div class="footer-container">
+        <p class="support-info">PreventScripts Support Information</p>
+        <p class="support-text">
+          For patient concerns with scale connection, starter kits, app issues,
+          etc
+        </p>
+        <div class="contact-container">
+          <div class="contact-item">
+            <p class="contact-text">Contact us at</p>
+            <p class="contact-text support-email">support@preventscripts</p>
+          </div>
+          <div class="contact-item">
+            <p class="contact-text support-phone">Call 859-287-4977</p>
+          </div>
+          <div class="contact-item">
+            <p class="contact-text support-select">Select</p>
+            <p class="contact-text support-button">Support button</p>
+            <p class="contact-text support-select">in app</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var values = JSON.parse(`<%- JSON.stringify(weightValues) %>`);
+      var dates = JSON.parse(`<%- JSON.stringify(weightDates) %>`);
+      var firstRecordedWeight = JSON.parse(
+        `<%- JSON.stringify(firstRecordedWeight) %>`
+      );
+      document.addEventListener("DOMContentLoaded", function () {
+        var options = {
+          chart: {
+            type: "line",
+            height: 300,
+            width: 390,
+
+            toolbar: {
+              show: false,
+            },
+            zoom: {
+              enabled: false,
+            },
+            animations: {
+              enabled: false,
+            },
+          },
+
+          stroke: {
+            width: 5,
+            curve: "smooth",
+          },
+          grid: {
+            xaxis: {
+              lines: {
+                show: false,
+              },
+            },
+            yaxis: {
+              lines: {
+                show: true,
+              },
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          colors: ["#3D98DA"],
+          series: [
+            {
+              name: "Weight",
+              data: values,
+              animations: {
+                enabled: false,
+              },
+            },
+          ],
+          xaxis: {
+            categories: dates,
+          },
+          yaxis: {
+            max:
+              firstRecordedWeight && values.length
+                ? firstRecordedWeight > Math.max(...values)
+                  ? firstRecordedWeight
+                  : Math.max(...values)
+                : 0,
+            min:
+              firstRecordedWeight && values.length
+                ? firstRecordedWeight < Math.min(...values)
+                  ? firstRecordedWeight - 2
+                  : Math.min(...values) - 2
+                : 0,
+            labels: {
+              offsetX: -12,
+              style: {
+                fontSize: 8,
+              },
+            },
+          },
+          annotations: {
+            yaxis: [
+              firstRecordedWeight
+                ? {
+                    y: firstRecordedWeight ?? 0,
+                    borderColor: "gray",
+                    label: {
+                      text: `First Recorded Weight ${firstRecordedWeight} Pounds`,
+                      borderColor: "gray",
+                      style: {
+                        background: "#fff",
+                        color: "#333",
+                        padding: 5,
+                        fontSize: "8px",
+                        fontWeight: "medium",
+                      },
+                      offsetY: 0,
+                      offsetX: -80,
+                    },
+                  }
+                : {},
+            ],
+          },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        // Function to capture chart and set it as background image
+        chart.render().then(function () {
+          if (chart.w.globals.animationEnded) {
+            console.log("Chart has not been rendered yet", chart);
+          } else {
+            console.log("Chart has not been rendered yet", chart);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

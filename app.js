@@ -460,18 +460,18 @@ const data2 = {
       "Not eligible for RPM, but should receive ongoing emails and/or texts about healthy living, chronic conditions, and health risks",
   },
   rpmRecommendations: "Enroll in RPM",
-  selfEfficacyTScore: 100,
+  selfEfficacyTScore: 0,
   selfEfficacyRecommendation:
     "Patients with a very low self-efficacy score are least likely to achieve their goals and overcome barriers without extensive support.  Take small incremental steps and breakdown tasks to make it easier for them to understand and follow.  Be patient and provide positive reinforcement with  minimal progress.  Educate them on the resources available to them through the app and on how to communicate questions, concerns, and request support.  It is important they feel comfortable to ask for help.",
   selfEfficacyRating: "Very Low",
   physicalHealthRating: "Poor",
-  physicalHealthScoreTScore: 15,
+  physicalHealthScoreTScore: 0,
   physicalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
   mentalHealthRating: "Poor",
   mentalHealthRecommendation:
     "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-  mentalHealthScoreTScore: 35,
+  mentalHealthScoreTScore: 0,
   physicalHealthScore: 0,
   motivationStage: "Pre-contemplative",
   motivationStageRecommendation:
@@ -490,47 +490,31 @@ const data2 = {
   ],
   firstPhysicalAndMentalHealthScore: {
     physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 25,
+    physicalHealthScoreTScore: 10,
     physicalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
     mentalHealthRating: "Poor",
     mentalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 15,
-    physicalHealthScore: 45,
+    mentalHealthScoreTScore: 10,
+    physicalHealthScore: 10,
     date: "29 | Nov | 2023",
   },
   latestPhysicalAndMentalHealthScore: {
-    physicalHealthRating: "Poor",
-    physicalHealthScoreTScore: 35,
+    physicalHealthRating: "Excellent",
+    physicalHealthScoreTScore: 20,
     physicalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
     mentalHealthRating: "Poor",
     mentalHealthRecommendation:
       "PROMIS Mental Health rating of Poor indicates the patient feels their current services are least positively impacting their health outcomes. PreventScripts Daily Tips, Weekly Surveys, and Monthly RPM services are designed to improve these scores over time.",
-    mentalHealthScoreTScore: 25,
+    mentalHealthScoreTScore: 20,
     physicalHealthScore: 77,
     date: "30 | Nov | 2023",
   },
   formattedDOB: "5th Dec, 2000",
   dateSubmitted: "15th Dec, 2023",
 };
-
-const mentalData = [
-  { date: "1 DEC 2022", value: 20 },
-  { date: "1 DEC 2022", value: 40 },
-  { date: "1 DEC 2022", value: 60 },
-  { date: "1 DEC 2022", value: 80 },
-  { date: "1 DEC 2022", value: 10 },
-];
-
-const physicalData = [
-  { date: "1 DEC 2022", value: 10 },
-  { date: "1 DEC 2022", value: 30 },
-  { date: "1 DEC 2022", value: 50 },
-  { date: "1 DEC 2022", value: 70 },
-  { date: "1 DEC 2022", value: 90 },
-];
 
 const {
   reqData,
@@ -570,6 +554,10 @@ app.get("/", (req, res) => {
       preferredLanguage: JSON.stringify(reqData.preferredLanguage),
     },
     riskResponses,
+    lastName: "wasif",
+    firstName: "khan",
+    dateOfBirth: "123123",
+    dateOfReport: "12323",
     riskRating,
     riskScoring,
     selfEfficacyResponses,
@@ -599,6 +587,7 @@ app.get("/", (req, res) => {
     bmiScore: 12,
     preferredLanguage: ["English", "Russian"],
     chronicConditions: ["Fever", "Dumyy"],
+    clinicReportText: "wsif",
   });
 });
 
@@ -658,6 +647,56 @@ app.get("/download", async (req, res) => {
   // Send the PDF buffer as a response
   res.setHeader("Content-Type", "application/pdf");
   res.send(pdfBuffer);
+});
+
+app.get("/report", (req, res) => {
+  res.render("patient", {
+    lastName: "Doe",
+    firstName: "John",
+    dateOfBirth: "01/01/1990",
+    dateOfReport: "04/17/2024",
+    planSubmittedAt: "04/15/2024",
+    planGoal: "Lose weight",
+    planMotivation: "to improve overall health",
+    planBarrier: "Lack of time for exercise",
+    planSelectedOption: "Option A",
+    scientificRecommendation:
+      "Increase physical activity and reduce calorie intake",
+    weightDifference: -3,
+    joinedAt: "04/17/2024",
+    yesterdayWaterIntake: 60,
+    todayWaterIntake: 72,
+    yesterdayFruitIntake: 3,
+    todayFruitIntake: 4,
+    yesterdayVegetableIntake: 6,
+    todayVegetableIntake: 7,
+    lastMonthStepsAvg: 8000,
+    thisMonthStepsAvg: 8500,
+    thisMonthOpened: 25,
+    lastMonthOpened: 30,
+    totalWeighInsThisMonth: 10,
+    bmi: 24.5,
+    startingBmi: 25.1,
+    latestBloodPressure: { systolic: 120, dystolic: 80 },
+    latestBloodPressureDate: "04/16/2024",
+    latestWeight: { value: 160 },
+    latestWeightDate: "04/17/2024",
+    latestBloodSugar: { value: 90 },
+    latestBloodSugarDate: "04/15/2024",
+    latestWaist: { value: 32 },
+    latestWaistDate: "04/14/2024",
+    weightValues: [160, 158, 157, 156, 155, 154, 153],
+    weightDates: [
+      "04/10/2024",
+      "04/11/2024",
+      "04/12/2024",
+      "04/13/2024",
+      "04/14/2024",
+      "04/15/2024",
+      "04/16/2024",
+    ],
+    firstRecordedWeight: 165,
+  });
 });
 const PORT = process.env.PORT || 5000;
 
